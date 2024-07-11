@@ -182,7 +182,7 @@ button:hover:after, button:hover:before {
 }
 
 .glow-effect:is(:hover, :focus) :is(.glow-line, .glow-blur){
-    stroke-dashoffset: -50px;
+    stroke-dashoffset: -60px;
     transition: stroke-dashoffset var(--animation-speed) ease-in;
 }
 
