@@ -41,7 +41,6 @@ img {
     object-fit: cover;
 }
 
-
 .card {
     width: 20rem;
     margin: 20px;
@@ -212,6 +211,20 @@ button:hover:after, button:hover:before {
     filter: blur(var(--glow-blur-size));
     stroke: var(--glow-blur-color);
     stroke-width: var(--glow-blur-size);
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+
+@media (max-width: 1200px) {
+    .row-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .row-container {
+        grid-template-columns: 1fr; /* 1 card per row */
+    }
 }
 
 /*KEYFRAMES*/
