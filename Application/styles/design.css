@@ -6,7 +6,7 @@
 }
 
 body{
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +40,7 @@ img {
     border-radius: 50%;
     object-fit: cover;
 }
+
 
 .card {
     width: 20rem;
@@ -87,24 +88,14 @@ img {
 .email {
     margin-top: 0;
     font-size: 0.9rem;
+    font-weight: 300;
 }
 
 .row-container {
-    display: flex;
-    justify-content: space-around; 
-    align-items: center; 
-    flex-wrap: wrap; 
-}
-
-/* TO INITIALLY HIDE CARDS 4-12 */
-.container .row-container .card {
-    display: none;
-}
-
-.container .row-container:nth-child(1) .card:nth-child(1),
-.container .row-container:nth-child(1) .card:nth-child(2),
-.container .row-container:nth-child(1) .card:nth-child(3) {
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    gap: 20px; 
+    justify-content: center; 
 }
 
 /* BUTTON */
@@ -161,6 +152,10 @@ button:hover:after, button:hover:before {
     height: calc(100% + 15px);;
     transition: 0.4s, opacity 0.1s;
     opacity: 1;
+}
+
+.button-container button.no-data {
+    cursor: not-allowed;
 }
 
 /* GLOW EFFECT ON CARDS */

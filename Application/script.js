@@ -1,26 +1,138 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let loadMoreBtn = document.querySelector('#loadMore');
-    let currentRow = 1; //first row of cards
+    const cardContainer = document.getElementById('card-container');
+    const loadMoreButton = document.getElementById('loadMore');
 
-    loadMoreBtn.addEventListener('click', () => {
-        currentRow++;
+    const sampleData = [
+        {
+          id: 1,
+          email: "george.bluth@reqres.in",
+          first_name: "George",
+          last_name: "Bluth",
+          avatar: "https://reqres.in/img/faces/1-image.jpg",
+        },
+        {
+          id: 2,
+          email: "janet.weaver@reqres.in",
+          first_name: "Janet",
+          last_name: "Weaver",
+          avatar: "https://reqres.in/img/faces/2-image.jpg",
+        },
+        {
+          id: 3,
+          email: "emma.wong@reqres.in",
+          first_name: "Emma",
+          last_name: "Wong",
+          avatar: "https://reqres.in/img/faces/3-image.jpg",
+        },
+        {
+          id: 4,
+          email: "eve.holt@reqres.in",
+          first_name: "Eve",
+          last_name: "Holt",
+          avatar: "https://reqres.in/img/faces/4-image.jpg",
+        },
+        {
+          id: 5,
+          email: "charles.morris@reqres.in",
+          first_name: "Charles",
+          last_name: "Morris",
+          avatar: "https://reqres.in/img/faces/5-image.jpg",
+        },
+        {
+          id: 6,
+          email: "tracey.ramos@reqres.in",
+          first_name: "Tracey",
+          last_name: "Ramos",
+          avatar: "https://reqres.in/img/faces/6-image.jpg",
+        },
+        {
+          id: 7,
+          email: "michael.lawson@reqres.in",
+          first_name: "Michael",
+          last_name: "Lawson",
+          avatar: "https://reqres.in/img/faces/7-image.jpg",
+        },
+        {
+          id: 8,
+          email: "lindsay.ferguson@reqres.in",
+          first_name: "Lindsay",
+          last_name: "Ferguson",
+          avatar: "https://reqres.in/img/faces/8-image.jpg",
+        },
+        {
+          id: 9,
+          email: "tobias.funke@reqres.in",
+          first_name: "Tobias",
+          last_name: "Funke",
+          avatar: "https://reqres.in/img/faces/9-image.jpg",
+        },
+        {
+          id: 10,
+          email: "byron.fields@reqres.in",
+          first_name: "Byron",
+          last_name: "Fields",
+          avatar: "https://reqres.in/img/faces/10-image.jpg",
+        },
+        {
+          id: 11,
+          email: "george.edwards@reqres.in",
+          first_name: "George",
+          last_name: "Edwards",
+          avatar: "https://reqres.in/img/faces/11-image.jpg",
+        },
+        {
+          id: 12,
+          email: "rachel.howell@reqres.in",
+          first_name: "Rachel",
+          last_name: "Howell",
+          avatar: "https://reqres.in/img/faces/12-image.jpg",
+        },
+      ];
 
-        let cards = [...document.querySelectorAll('.container .row-container:nth-child(' + currentRow + ') .card')];
+    let currentIndex = 0;
+    const cardsPerLoad = 3;
 
-        // If there are cards in the new row, display the first set of 3 cards
-        if (cards.length > 0) {
-            let cardsToShow = cards.slice(0, 3); // Shows the first 3 cards of the new row
-            cardsToShow.forEach(card => card.style.display = 'inline-block');
+    function createCard(sampleData) {
+        const card = document.createElement('div');
+        card.className = 'card glow-effect';
+
+        card.innerHTML = `
+            <div class="card-image">
+                <img src="${sampleData.avatar}" alt="image${sampleData.id}" class="avatar">
+            </div>
+            <div class="content">
+                <div class="id">
+                    <h1 class="idno">#${sampleData.id}</h1>
+                </div>
+                <div class="desc">
+                    <h2 class="name">${sampleData.last_name}, ${sampleData.first_name}</h2>
+                    <h3 class="email"><a href="mailto:${sampleData.email}">${sampleData.email}</a></h3>
+                </div>
+            </div>
+            <svg class="glow-container">
+                <rect pathLength="100" stroke-linecap="round" class="glow-blur"></rect>
+                <rect pathLength="100" stroke-linecap="round" class="glow-line"></rect>
+            </svg>
+        `;
+
+        cardContainer.appendChild(card);
+    }
+
+    function loadCards() {
+        const nextIndex = currentIndex + cardsPerLoad;
+        const cardsToLoad = sampleData.slice(currentIndex, nextIndex);
+        cardsToLoad.forEach(sampleData => createCard(sampleData));
+        currentIndex = nextIndex;
+
+        if (currentIndex >= sampleData.length) {
+            loadMoreButton.textContent = "No Data";
+            loadMoreButton.disabled = true;
+            loadMoreButton.classList.add('no-data');
         }
+    }
 
-        // Check if there is another row of cards
-        let nextRowExists = document.querySelector('.container .row-container:nth-child(' + (currentRow + 1) + ')') !== null;
+    loadMoreButton.addEventListener('click', loadCards);
 
-        if (!nextRowExists) {
-         loadMoreBtn.textContent = 'No Data'; // Change button text
-         loadMoreBtn.disabled = true; 
-         loadMoreBtn.style.backgroundColor = 'none'; 
-         loadMoreBtn.style.cursor = 'not-allowed';
-        }
-    });
+    // Load initial cards
+    loadCards();
 });
